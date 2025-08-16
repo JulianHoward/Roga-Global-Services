@@ -1,0 +1,12 @@
+/* Estilos mínimos para la aplicación. Material-UI maneja la mayoría de los estilos. */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Open Sans', sans-serif; /* Puedes dejar las fuentes aquí para que estén disponibles globalmente */
+}
+
+/* Puedes dejar un estilo de scroll suave si quieres, pero M-UI maneja la navegación */
+html {
+  scroll-behavior: smooth;
+}
