@@ -16,18 +16,19 @@ export default function WhatWeDo() {
       {/* Columna de la imagen */}
       <Box
         sx={{
-          flex: '0 0 55%',
-          backgroundImage: 'url(/images/what.jpg)', // Se mantiene la imagen original
-          backgroundSize: 'cover',
+          flex: { xs: 1, md: '0 0 55%' }, // ocupa todo en mobile, 55% en desktop
+          backgroundImage: 'url(/images/what-section.webp)',
+          backgroundSize: 'cover', // siempre cubrir
           backgroundPosition: 'center',
-          height: { xs: '50vh', md: '100vh' }, // Altura ajustada para móviles
+          backgroundRepeat: 'no-repeat',
+          height: { xs: '100vh', md: '100vh' }, // altura completa en ambos
         }}
       ></Box>
 
       {/* Columna de texto */}
       <Box
         sx={{
-          flex: '0 0 45%',
+          flex: { xs: 1, md: '0 0 45%' },
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',

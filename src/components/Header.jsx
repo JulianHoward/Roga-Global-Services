@@ -1,6 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { AppBar, Toolbar, Typography, Box, Button, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  Button,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+
+import logo from '/images/logo.webp';
 
 const menuItems = [
   { label: 'Home', id: 'home' },
@@ -9,7 +23,6 @@ const menuItems = [
   { label: 'Contact', id: 'contact' },
 ];
 
-// Estilos de texto reutilizables
 const menuTypographyStyles = {
   fontFamily: 'Open Sans, sans-serif',
   fontWeight: 600,
@@ -21,9 +34,7 @@ export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Función de debounce para el scroll
   const handleScroll = useCallback(() => {
-    // Si la última ejecución fue hace menos de 100ms, no hacer nada
     let lastKnownScrollPosition = window.scrollY;
     let ticking = false;
 
@@ -44,7 +55,9 @@ export default function Header() {
   const handleClick = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const yOffset = -60; // Ajusta según la altura del navbar
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
       setDrawerOpen(false);
     }
   };
@@ -56,7 +69,7 @@ export default function Header() {
       sx={{
         backgroundColor: scrolled ? '#0B0F3F' : '#10144B',
         transition: 'background-color 0.3s ease',
-        minHeight: '120px',
+        minHeight: '60px',
       }}
     >
       <Toolbar
@@ -65,17 +78,30 @@ export default function Header() {
           justifyContent: 'space-between',
           alignItems: 'center',
           px: { xs: 2, md: 4 },
-          minHeight: '120px',
+          minHeight: '60px',
         }}
       >
-        {/* Logo */}
+        {/* Logo + Nombre */}
         <Box sx={{ display: 'flex', alignItems: 'center', flex: { xs: 1, md: 0.3 } }}>
+          <img
+            src={logo}
+            alt="Logo"
+            style={{
+              height: '120px',
+              width: '120px',
+              borderRadius: '50%',
+              objectFit: 'cover',
+              marginRight: '16px',
+              cursor: 'pointer'
+            }}
+            onClick={() => handleClick('home')}
+          />
           <Typography
             variant="h6"
             sx={{
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 700,
-              fontSize: { xs: '22px', md: '26px' },
+              fontSize: { xs: '18px', md: '20px' },
               color: 'white',
               cursor: 'pointer'
             }}
@@ -86,7 +112,14 @@ export default function Header() {
         </Box>
 
         {/* Menú en pantallas grandes */}
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, flex: { xs: 0, md: 0.7 }, justifyContent: 'space-around', alignItems: 'center' }}>
+        <Box
+          sx={{
+            display: { xs: 'none', md: 'flex' },
+            flex: { xs: 0, md: 0.7 },
+            justifyContent: 'space-around',
+            alignItems: 'center'
+          }}
+        >
           {menuItems.map(({ label, id }) => (
             <Button
               key={id}
@@ -94,7 +127,7 @@ export default function Header() {
               sx={{
                 ...menuTypographyStyles,
                 textTransform: 'none',
-                fontSize: { xs: '18px', md: '20px' }
+                fontSize: { xs: '14px', md: '16px' }
               }}
             >
               {label}
@@ -102,7 +135,7 @@ export default function Header() {
           ))}
         </Box>
 
-        {/* Menú de hamburguesa para móviles */}
+        {/* Menú hamburguesa móvil */}
         <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
           <IconButton
             color="inherit"
@@ -127,7 +160,7 @@ export default function Header() {
               <ListItemButton onClick={() => handleClick(id)}>
                 <ListItemText
                   primary={label}
-                  primaryTypographyProps={{...menuTypographyStyles, fontSize: '18px'}} // La corrección está aquí
+                  primaryTypographyProps={{ ...menuTypographyStyles, fontSize: '14px' }}
                 />
               </ListItemButton>
             </ListItem>

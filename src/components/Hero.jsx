@@ -1,13 +1,12 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-// Asegúrate de que esta imagen esté en tu carpeta /public/images y esté optimizada
-const backgroundImage = '/images/hero-bg.webp';
+const backgroundImage = '/images/hero.webp';  
 
 export default function Hero() {
   return (
     <Box
-      id="home" // Agregado para la navegación
+      id="home"
       sx={{
         height: '100vh',
         backgroundImage: `url(${backgroundImage})`,
@@ -43,6 +42,7 @@ export default function Hero() {
             fontWeight: 700,
             mb: 2,
             fontSize: '70px',
+            color: 'white', // Texto principal blanco
           }}
         >
           Expanding your reach, globally.
@@ -53,8 +53,8 @@ export default function Hero() {
           sx={{
             fontFamily: 'Open Sans, sans-serif',
             fontWeight: 400,
-            color: '#8A8BA4',
             fontSize: '40px',
+            color: 'white', // Texto secundario también blanco
           }}
         >
           One connection at a time.

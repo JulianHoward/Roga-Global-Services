@@ -21,7 +21,7 @@ export default function Destinations() {
         minHeight: '100vh',
         backgroundColor: '#fff',
         color: '#122665',
-        backgroundImage: 'url(/images/destination2.webp)',
+        backgroundImage: 'url(/images/destinations-bg.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         position: 'relative',
