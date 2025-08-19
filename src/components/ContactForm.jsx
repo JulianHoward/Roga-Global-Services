@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, Grid, TextField, Button, Typography } from '@mui/material';
+import { Helmet } from 'react-helmet'; // Importar Helmet
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import BusinessIcon from '@mui/icons-material/Business';
@@ -50,191 +51,195 @@ export default function ContactForm() {
       e.target,
       import.meta.env.VITE_EMAILJS_USER_ID
     )
-      .then((response) => {
-        // En producción, es mejor evitar console.log
-        // console.log("Email sent successfully", response); 
+      .then(() => {  // Se eliminó la variable "response" ya que no la estamos utilizando
         setMessageSent(true);
         setIsSending(false);
         setFormData({ name: '', lastName: '', email: '', country: '', company: '', message: '' });
       })
-      .catch((error) => {
-        // console.error("EmailJS Error:", error);
+      .catch(() => {  // Se eliminó la variable "error" ya que no la estamos utilizando
         setIsSending(false);
         alert('Error al enviar el formulario. Intenta nuevamente.');
       });
   };
 
   return (
-    <Box
-      id="contact"
-      sx={{
-        padding: { xs: 4, md: 8 },
-        backgroundColor: '#fff',
-        color: '#122665',
-      }}
-    >
-      <Typography
-        variant="h2"
+    <>
+      {/* Agregar Helmet con la meta descripción */}
+      <Helmet>
+        <meta name="description" content="Get in touch with RoGa Global Services for all your business needs. Let us help you expand globally." />
+      </Helmet>
+
+      <Box
+        id="contact"
         sx={{
-          fontFamily: 'Poppins, sans-serif',
-          fontWeight: 600,
-          fontSize: { xs: '48px', md: '72px' },
-          color: '#10144B',
-          mb: 3,
-          textAlign: { xs: 'center', md: 'left' },
+          padding: { xs: 4, md: 8 },
+          backgroundColor: '#fff',
+          color: '#122665',
         }}
       >
-        Let’s Connect
-      </Typography>
-
-      <form onSubmit={handleSubmit}>
-        <Box
+        <Typography
+          variant="h2"
           sx={{
-            maxWidth: 900,
-            mx: 'auto',
-            p: { xs: 2, md: 4 },
-            border: '4px solid #1B4892',
-            borderRadius: '20px',
+            fontFamily: 'Poppins, sans-serif',
+            fontWeight: 600,
+            fontSize: { xs: '48px', md: '72px' },
+            color: '#10144B',
+            mb: 3,
+            textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          <Grid
-            container
-            spacing={2}
+          Let’s Connect
+        </Typography>
+
+        <form onSubmit={handleSubmit}>
+          <Box
             sx={{
-              display: 'grid',
-              gridTemplateColumns: {
-                xs: '1fr',
-                sm: 'repeat(2, 1fr)',
-                md: 'repeat(2, 1fr)',
-              },
+              maxWidth: 900,
+              mx: 'auto',
+              p: { xs: 2, md: 4 },
+              border: '4px solid #1B4892',
+              borderRadius: '20px',
             }}
           >
-            <Box sx={{ gridColumn: 'span 1' }}>
-              <TextField
-                fullWidth
-                label="Name"
-                variant="outlined"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                InputProps={{
-                  startAdornment: <PersonIcon sx={{ color: '#1B4892', mr: 1 }} />,
-                }}
-                sx={textFieldStyles} // Uso de los estilos refactorizados
-                required
-              />
-            </Box>
-            <Box sx={{ gridColumn: 'span 1' }}>
-              <TextField
-                fullWidth
-                label="Last Name"
-                variant="outlined"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                InputProps={{
-                  startAdornment: <PersonIcon sx={{ color: '#1B4892', mr: 1 }} />,
-                }}
-                sx={textFieldStyles} // Uso de los estilos refactorizados
-                required
-              />
-            </Box>
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: {
+                  xs: 'repeat(1, 1fr)',
+                  sm: 'repeat(2, 1fr)',
+                  md: 'repeat(2, 1fr)',
+                },
+              }}
+            >
+              <Box sx={{ gridColumn: 'span 1' }}>
+                <TextField
+                  fullWidth
+                  label="Name"
+                  variant="outlined"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  InputProps={{
+                    startAdornment: <PersonIcon sx={{ color: '#1B4892', mr: 1 }} />,
+                  }}
+                  sx={textFieldStyles} // Uso de los estilos refactorizados
+                  required
+                />
+              </Box>
+              <Box sx={{ gridColumn: 'span 1' }}>
+                <TextField
+                  fullWidth
+                  label="Last Name"
+                  variant="outlined"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  InputProps={{
+                    startAdornment: <PersonIcon sx={{ color: '#1B4892', mr: 1 }} />,
+                  }}
+                  sx={textFieldStyles} // Uso de los estilos refactorizados
+                  required
+                />
+              </Box>
 
-            <Box sx={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'center' }}>
-              <TextField
-                fullWidth
-                label="Email"
-                variant="outlined"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                InputProps={{
-                  startAdornment: <EmailIcon sx={{ color: '#1B4892', mr: 1 }} />,
-                }}
-                sx={{ ...textFieldStyles, width: '50%' }} // Uso de los estilos refactorizados
-                required
-              />
-            </Box>
+              <Box sx={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'center' }}>
+                <TextField
+                  fullWidth
+                  label="Email"
+                  variant="outlined"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  InputProps={{
+                    startAdornment: <EmailIcon sx={{ color: '#1B4892', mr: 1 }} />,
+                  }}
+                  sx={{ ...textFieldStyles, width: '50%' }} // Uso de los estilos refactorizados
+                  required
+                />
+              </Box>
 
-            <Box sx={{ gridColumn: 'span 1' }}>
-              <TextField
-                fullWidth
-                label="Country"
-                variant="outlined"
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                InputProps={{
-                  startAdornment: <PublicIcon sx={{ color: '#1B4892', mr: 1 }} />,
-                }}
-                sx={textFieldStyles} // Uso de los estilos refactorizados
-                required
-              />
-            </Box>
-            <Box sx={{ gridColumn: 'span 1' }}>
-              <TextField
-                fullWidth
-                label="Company"
-                variant="outlined"
-                name="company"
-                value={formData.company}
-                onChange={handleChange}
-                InputProps={{
-                  startAdornment: <BusinessIcon sx={{ color: '#1B4892', mr: 1 }} />,
-                }}
-                sx={textFieldStyles} // Uso de los estilos refactorizados
-                required
-              />
-            </Box>
+              <Box sx={{ gridColumn: 'span 1' }}>
+                <TextField
+                  fullWidth
+                  label="Country"
+                  variant="outlined"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  InputProps={{
+                    startAdornment: <PublicIcon sx={{ color: '#1B4892', mr: 1 }} />,
+                  }}
+                  sx={textFieldStyles} // Uso de los estilos refactorizados
+                  required
+                />
+              </Box>
+              <Box sx={{ gridColumn: 'span 1' }}>
+                <TextField
+                  fullWidth
+                  label="Company"
+                  variant="outlined"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  InputProps={{
+                    startAdornment: <BusinessIcon sx={{ color: '#1B4892', mr: 1 }} />,
+                  }}
+                  sx={textFieldStyles} // Uso de los estilos refactorizados
+                  required
+                />
+              </Box>
 
-            <Box sx={{ gridColumn: '1 / -1' }}>
-              <TextField
-                fullWidth
-                label="Message"
-                variant="outlined"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                multiline
-                rows={8}
-                sx={textFieldStyles} // Uso de los estilos refactorizados
-                required
-              />
-            </Box>
+              <Box sx={{ gridColumn: '1 / -1' }}>
+                <TextField
+                  fullWidth
+                  label="Message"
+                  variant="outlined"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  multiline
+                  rows={8}
+                  sx={textFieldStyles} // Uso de los estilos refactorizados
+                  required
+                />
+              </Box>
 
-            <Box sx={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'center' }}>
-              <Button
-                type="submit"
-                variant="outlined"
-                sx={{
-                  backgroundColor: 'transparent',
-                  color: '#1B4892',
-                  fontWeight: 'bold',
-                  textTransform: 'none',
-                  borderRadius: '20px',
-                  borderWidth: '4px',
-                  borderColor: '#1B4892',
-                  '&:hover': {
-                    backgroundColor: '#10144B',
-                    color: '#fff',
+              <Box sx={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'center' }}>
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  sx={{
+                    backgroundColor: 'transparent',
+                    color: '#1B4892',
+                    fontWeight: 'bold',
+                    textTransform: 'none',
+                    borderRadius: '20px',
                     borderWidth: '4px',
-                  },
-                  padding: '10px 20px',
-                }}
-                disabled={isSending}
-              >
-                {isSending ? 'Sending...' : 'Send'}
-              </Button>
-            </Box>
-          </Grid>
-        </Box>
-      </form>
+                    borderColor: '#1B4892',
+                    '&:hover': {
+                      backgroundColor: '#10144B',
+                      color: '#fff',
+                      borderWidth: '4px',
+                    },
+                    padding: '10px 20px',
+                  }}
+                  disabled={isSending}
+                >
+                  {isSending ? 'Sending...' : 'Send'}
+                </Button>
+              </Box>
+            </Grid>
+          </Box>
+        </form>
 
-      {messageSent && (
-        <Typography sx={{ color: 'green', mt: 2, textAlign: 'center' }}>
-          Message sent successfully!
-        </Typography>
-      )}
-    </Box>
+        {messageSent && (
+          <Typography sx={{ color: 'green', mt: 2, textAlign: 'center' }}>
+            Message sent successfully!
+          </Typography>
+        )}
+      </Box>
+    </>
   );
 }

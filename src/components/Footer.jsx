@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Link, Stack, Typography } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -33,6 +32,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener"
             sx={{ display: 'flex', alignItems: 'center', color: '#fff', textDecoration: 'none' }}
+            aria-label={`Follow us on ${link.name}`}  // Accesibilidad: Descripción adicional
           >
             <link.icon sx={{ mr: 1, fontSize: '24px' }} />
             <Typography
